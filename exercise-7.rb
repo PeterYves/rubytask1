@@ -27,9 +27,9 @@ class Janken
   def pon(player_hand, enemy_hand)
     result=((player_hand-enemy_hand+3)%3)
 	if(result==2)
-	  " congrats you Win!"
+    "congrats you Win!"
     elsif(result==1)
-	  "oops!!oops!!you loose"
+    "oops!!oops!!you loose"
 	else
 	  "its a Draw" 
 	end
@@ -38,25 +38,29 @@ class Janken
 end
 
 while(true) do
-	puts "* press 0 to exit game or"
-	puts "* press any other number to start the game"
-	x=gets.to_i
-	if(x==0)
-		break
-	end
+	
 puts "choose a number to start game"
 puts "0: Goo"
 puts "1: Choki"
 puts "2: Par"
 choice=gets.to_i
-if(choice<0 || choice>3)
-	puts " [please choose between 0 and 3]"
+if(choice<0 || choice>2)
+  puts "[please choose between 0 and 2]"
 else
   player = Player.new(choice)
   arr=[0,1,2]
   random=arr[rand(arr.count)];
   enemy = Enemy.new(random)
   janken = Janken.new(player,enemy)
-  puts janken.pon(player.hand, enemy.hand)
+  if(janken.pon(player.hand, enemy.hand)=="congrats you Win!")
+    puts janken.pon(player.hand, enemy.hand)
+    break
+  elsif(janken.pon(player.hand, enemy.hand)=="oops!!oops!!you loose")
+    puts janken.pon(player.hand, enemy.hand)
+    break
+  else
+    puts janken.pon(player.hand, enemy.hand)
+  end
 end
 end
+
